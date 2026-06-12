@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    triggers {
+        pollSCM('* * * * *')  // revisa cada minuto
+    }
     stages {
         stage('Clonar código') {
             steps {
