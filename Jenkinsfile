@@ -24,4 +24,4 @@ pipeline {
             echo 'Algo falló!'
         }
     }
-}
+}# Test polling
