@@ -1,9 +1,21 @@
 pipeline {
     agent any
     triggers {
-        pollSCM('* * * * *')  // revisa cada minuto
+        pollSCM('* * * * *')
+    }
+    environment {
+        PROYECTO = 'jenkins-labs'
+        VERSION  = '1.0'
     }
     stages {
+        stage('Info') {
+            steps {
+                echo "Proyecto: ${PROYECTO}"
+                echo "Versión: ${VERSION}"
+                echo "Build number: ${BUILD_NUMBER}"
+                echo "Job name: ${JOB_NAME}"
+            }
+        }
         stage('Clonar código') {
             steps {
                 echo 'Clonando repositorio...'
@@ -18,7 +30,7 @@ pipeline {
     }
     post {
         success {
-            echo 'Pipeline completado exitosamente!'
+            echo "Pipeline ${PROYECTO} v${VERSION} completado!"
         }
         failure {
             echo 'Algo falló!'
